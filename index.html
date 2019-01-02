@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+
+<body>
+    <video id="video" src="#" width="600" height="400" autoplay controls></video>
+    
+    <div id="tools">
+        <h1>Video Streaming and Tracking</h1>
+        <div id="errorMsg"></div>
+    </div>
+
+    <script>
+        // init variables
+        const video = document.getElementById('video')
+        const video_src_url = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8'
+        const detect_rate = 1111
+    </script>
+
+    <!-- Video streaming -->
+    <script src="static/hls.js"></script>
+    <!-- <script src="static/webrtc.js"></script> -->
+
+    <!-- Deep learning -->
+    <script src="static/main.js"></script>
+</body>
+
+</html>

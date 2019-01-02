@@ -1,0 +1,25 @@
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    padding: 24px;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    pointer-events: none;
+
+    padding: 24px;
+}
+
+#tools {
+    margin-top: 400px;
+    display: block;
+
+    padding: 24px;
+}
