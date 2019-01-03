@@ -29,6 +29,10 @@ video.addEventListener('playing', () => {
                         let log = `Find (${i+1}/${len}): ${p['class']}\nbbox: [x, y, width, height]: ${p['bbox']}\nscore: ${p['score']}`
                         console.log(log)
                         
+                        if (checked_objects.includes(p['class']) === false) {
+                            continue
+                        }
+
                         let bbox = p['bbox']
 
                         // box
@@ -42,7 +46,6 @@ video.addEventListener('playing', () => {
                         ctx.font = '16pt Calibri'
                         ctx.fillStyle = 'red'
                         ctx.fillText(`${p['class']} ${Math.round(p['score'] * 100)}%`, bbox[0] + 5, bbox[1] + 20);
-
                     }
                 }
             })
@@ -51,3 +54,22 @@ video.addEventListener('playing', () => {
         }
     }, detect_rate)
 })
+
+var checked_objects = []
+var checkboxes = document.querySelectorAll('input[type=checkbox]')
+for (let i = 0; i < checkboxes.length; i++) {
+    let c = checkboxes[i];
+    c.addEventListener('change', function() {
+        if(this.checked) {
+            checked_objects.push(this.id)
+        } else {
+            for (let j = 0; j < checked_objects.length; j++) {
+                if (checked_objects[j] === this.id) {
+                    checked_objects.splice(j, 1)
+                }
+            }
+        }
+        console.log(checked_objects)
+    });
+    c.click() // default click all
+}
