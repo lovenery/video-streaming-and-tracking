@@ -30,16 +30,27 @@
           </div>
           <div id="errorMsg"></div>
       
+          <h4>Server Config</h4> 
           <div id="controls">
-            <p>Enter custom URL below: <input id="streamURL" class="innerControls" size="150" type=text value=""/></p>
-            <p>
-              <label class="innerControls">
-                Current video-resolution:
-                <span id="currentResolution">/</span>
-              </label>
+            <p>1. Enter hls index file's(.m3u8) URL: <input id="streamURL" class="innerControls" size="130" type=text value=""/></p>
+            <p>2. Or enter server's URL: 
+              <input id="prefix_url" class="innerControls" size="143" type=text value="" onchange="change_prefix();"/>
             </p>
+            <p id="confirm_msg"></p>
           </div>
-      
+          
+          <h4>Multibitrate</h4> 
+          <p>
+            <label class="innerControls">
+              Current video-resolution:
+              <span id="currentResolution">/</span>
+            </label>
+          </p>
+
+          <button type="button" class="btn btn-sm btn-info" onclick="multi_bitrate('/hls/moive_240p/index.m3u8')">240p</button>
+          <button type="button" class="btn btn-sm btn-info" onclick="multi_bitrate('/hls/moive_360p/index.m3u8')">360p</button>
+          <button type="button" class="btn btn-sm btn-info" onclick="multi_bitrate('/hls/moive_480p/index.m3u8')">480p</button>
+
           <h4>Playback</h4> 
           <p>
             <button type="button" class="btn btn-sm btn-info" onclick="$('#video')[0].play()">Play</button>
@@ -53,7 +64,18 @@
 
     <script>
         // init variables
-        const detect_rate = 1111
+        const detect_rate = 1111;
+        var prefix_url = "";
+
+        function change_prefix(){
+          prefix_url = document.getElementById('prefix_url').value;
+          document.getElementById('confirm_msg').innerHTML="<font color='red'>"+"confirm save!<br />now server's URL is: "+prefix_url+"</font>";
+        }
+        function multi_bitrate(post_url){
+          full_url = prefix_url+post_url;
+          $('#streamURL').val(full_url);
+          loadSelectedStream();
+        }
     </script>
 
     <!-- Video streaming -->
