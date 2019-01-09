@@ -119,7 +119,10 @@ rtmp {
 #### step3. streaming
 1. use ffmpeg for streaming(with hls)
 ```
-ffmpeg -f avfoundation -r 30 -i 0 -deinterlace -vcodec libx264 -pix_fmt yuv420p -preset medium -g 60 -b:v 360k -threads 6 -bufsize 2048k -f flv rtmp://localhost/hls/moive
+ffmpeg -f avfoundation -r 30 -i 0 \
+-vf scale=w=426:h=240 -deinterlace -vcodec libx264 -pix_fmt yuv420p -preset medium -g 60 -b:v 200k -bufsize 4096k -f flv rtmp://localhost/hls/moive_240p \
+-vf scale=w=640:h=360 -deinterlace -vcodec libx264 -pix_fmt yuv420p -preset medium -g 60 -b:v 300k -bufsize 4096k -f flv rtmp://localhost/hls/moive_360p \
+-vf scale=w=854:h=480 -deinterlace -vcodec libx264 -pix_fmt yuv420p -preset medium -g 60 -b:v 400k -bufsize 4096k -f flv rtmp://localhost/hls/moive_480p 
 ```
 - this command is for macOS
 - note that output path: rtmp://localhost/hls/moive
